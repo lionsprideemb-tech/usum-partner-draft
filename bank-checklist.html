@@ -115,21 +115,6 @@ function render(){
    var i=Number(btn.dataset.ready),arr=new Set(readySaved[active]);if(arr.has(i))arr.delete(i);else arr.add(i);readySaved[active]=Array.from(arr);save();render();
  }});
 }
-document.getElementById("gibbyTab").classList.toggle("active",active==="gibby");
- document.getElementById("brandonTab").classList.toggle("active",active==="brandon");
- document.getElementById("teamTitle").textContent=active==="gibby"?"Gibby’s Team":"Brandon’s Team";
- var rows=TEAMS[active],found=new Set(saved[active]);
- document.getElementById("count").textContent=found.size+" / 18";
- document.getElementById("missingOnly").textContent=missing?"Show all":"Show missing only";
- document.getElementById("list").innerHTML=rows.map(function(r,i){
-   var type=r[0],name=r[1],line=r[2],num=r[3],exact=r[4],target=r[5],nature=r[6],focus=r[7],ability=r[8],slug=r[9],haSource=r[10]||"",done=found.has(i);
-   if(missing&&done)return "";
-   return '<label class="row '+(done?'done':'')+'"><input type="checkbox" data-i="'+i+'" '+(done?'checked':'')+'><div class="type">'+type+'</div><div class="sprite"><img src="'+spriteUrl(num,name)+'" alt="'+name+'" loading="lazy"></div><div><div class="name">'+name+'</div><div class="line">Look for: '+line+'</div><div class="prep"><strong>Build toward '+target+':</strong> '+nature+' nature • '+focus+' • Ability: '+ability+'</div>'+(haSource?'<div class="haSource"><strong>HA hunt:</strong> '+haSource+'</div>':'')+(exact?'<div class="exact">⚠ Exact Alolan form matters in Bank</div>':'')+'<div class="rowlinks"><a class="db" href="'+dbUrl(slug)+'" target="_blank" rel="noopener">📘 '+target+' on Pokémon Database</a></div></div></label>';
- }).join("");
- document.querySelectorAll('input[data-i]').forEach(function(cb){cb.onchange=function(){
-   var i=Number(cb.dataset.i),arr=new Set(saved[active]);if(cb.checked)arr.add(i);else arr.delete(i);saved[active]=Array.from(arr);save();render();
- }});
-}
 document.getElementById("gibbyTab").onclick=function(){active="gibby";render()};
 document.getElementById("brandonTab").onclick=function(){active="brandon";render()};
 document.getElementById("missingOnly").onclick=function(){missing=!missing;render()};
