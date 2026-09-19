@@ -15,7 +15,7 @@
 .progress{display:flex;justify-content:space-between;gap:10px;align-items:center}.count{font-size:18px;font-weight:900;color:var(--good)}.small{font-size:12px;color:var(--muted)}
 .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.controls button{min-height:42px;padding:8px 11px;border-radius:11px;border:1px solid var(--line);background:#173247;color:var(--text);font-weight:800}
 .list{display:grid;gap:8px}.row{display:grid;grid-template-columns:34px 78px 56px 1fr;gap:10px;align-items:start;background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:10px;min-height:92px}.row.done{opacity:.55}.row input{width:25px;height:25px;accent-color:#ffd166;margin-top:11px}.type{font-weight:900;margin-top:10px}.sprite{width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:#102638;border:1px solid rgba(255,255,255,.05)}.sprite img{max-width:44px;max-height:44px}
-.name{font-size:18px;font-weight:850;color:var(--good)}.line{font-size:12px;color:var(--muted);margin-top:2px}.prep{font-size:12px;color:#dbe8f1;margin-top:5px}.prep strong{color:#ffdca0}.exact{font-size:11px;color:#ffdca0;margin-top:4px}
+.name{font-size:18px;font-weight:850;color:var(--good)}.line{font-size:12px;color:var(--muted);margin-top:2px}.prep{font-size:12px;color:#dbe8f1;margin-top:5px}.prep strong{color:#ffdca0}.exact{font-size:11px;color:#ffdca0;margin-top:4px}.haSource{font-size:11px;line-height:1.35;color:#a9d7ff;margin-top:5px;padding:6px 8px;border-left:3px solid #76b7ff;background:rgba(118,183,255,.07);border-radius:6px}.haSource strong{color:#d9edff}
 .rowlinks{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px}.db{display:inline-flex;align-items:center;min-height:34px;padding:6px 9px;border-radius:9px;background:#173247;border:1px solid var(--line);color:var(--blue);text-decoration:none;font-size:12px;font-weight:900}.db:active{transform:scale(.98)}
 .note{margin-top:8px;color:var(--muted);font-size:11px}
 @media(max-width:520px){.row{grid-template-columns:32px 64px 46px 1fr;gap:7px;padding:8px}.type{font-size:13px}.name{font-size:16px}.sprite{width:44px;height:44px}.sprite img{max-width:38px;max-height:38px}.prep,.line{font-size:11px}.db{font-size:11px}}
@@ -24,7 +24,7 @@
 <body><div class="app">
 <h1>USUM Bank Hunt Checklist</h1>
 <div class="sub">Use this while searching Pokémon Bank. Any member of the listed evolution line counts unless the row says the exact Alolan form matters. The prep recommendation is a simple, strong default for an Ultra Sun/Ultra Moon story run—not the only viable build.</div>
-<div class="nav"><a class="btn" href="./">← Back to Draft</a></div>
+<div class="nav"><a class="btn" href="./">← Back to Draft</a></div><div class="card small"><strong style="color:#ffdca0">Hidden Ability tip:</strong> In USUM, an SOS ally can start having its Hidden Ability after a chain of 10. The HA chance is 5% at 10–19, 10% at 20–29, and 15% from 30 onward. At 30+, called Pokémon also have 4 guaranteed perfect IVs. Use an Adrenaline Orb and keep one caller alive. Transfer-only HAs must come from an older game / existing HA parent; Gen 7 has no Ability Patch.</div>
 <div class="tabs"><button id="gibbyTab" class="active">Gibby’s Team</button><button id="brandonTab">Brandon’s Team</button></div>
 <div class="card">
   <div class="progress"><div><strong id="teamTitle">Gibby’s Team</strong><div class="small">Tap the box when you find a usable member of that line in Bank.</div></div><div class="count" id="count">0 / 18</div></div>
@@ -40,26 +40,26 @@ var TEAMS={
   ["Fire","Turtonator","Turtonator",776,false,"Turtonator","Modest","Sp. Atk + HP","Shell Armor","turtonator"],
   ["Water","Staryu","Staryu / Starmie",120,false,"Starmie","Timid","Sp. Atk + Speed","Natural Cure","starmie"],
   ["Electric","Emolga","Emolga",587,false,"Emolga","Timid","Sp. Atk + Speed","Motor Drive","emolga"],
-  ["Grass","Tangela","Tangela / Tangrowth",114,false,"Tangrowth","Bold","HP + Defense","Regenerator (HA)","tangrowth"],
+  ["Grass","Tangela","Tangela / Tangrowth",114,false,"Tangrowth","Bold","HP + Defense","Regenerator (HA)","tangrowth","TRANSFER ONLY in USUM. Best offline Gen 6 route: ORAS DexNav a Tangela on a Mirage Island/Forest when one is active, where DexNav encounters can have HAs. Alternate: an already-HA-enabled X/Y Grass Friend Safari. Transfer through Bank."],
   ["Ice","Seel","Seel / Dewgong",86,false,"Dewgong","Adamant","Attack + HP","Thick Fat","dewgong"],
   ["Fighting","Machop","Machop / Machoke / Machamp",66,false,"Machamp","Adamant","Attack + HP","No Guard","machamp"],
   ["Poison","Ekans","Ekans / Arbok",23,false,"Arbok","Jolly","Attack + Speed","Intimidate","arbok"],
-  ["Ground","Tympole","Tympole / Palpitoad / Seismitoad",535,false,"Seismitoad","Modest","Sp. Atk + HP","Water Absorb (HA)","seismitoad"],
+  ["Ground","Tympole","Tympole / Palpitoad / Seismitoad",535,false,"Seismitoad","Modest","Sp. Atk + HP","Water Absorb (HA)","seismitoad","TRANSFER ONLY in USUM. Best source: X/Y Water Friend Safari — catch a Water Absorb Palpitoad, then transfer it (or breed a Tympole from it) through Bank. Friend Safari HAs must already be unlocked, or unlocked by local 3DS play now that Nintendo Network is offline."],
   ["Flying","Oricorio","Oricorio — any style is fine",741,false,"Oricorio","Timid","Sp. Atk + Speed","Dancer","oricorio"],
   ["Psychic","Spoink","Spoink / Grumpig",325,false,"Grumpig","Timid","Sp. Atk + Speed","Thick Fat","grumpig"],
   ["Bug","Cutiefly","Cutiefly / Ribombee",742,false,"Ribombee","Timid","Sp. Atk + Speed","Shield Dust","ribombee"],
-  ["Rock","Carbink","Carbink",703,false,"Carbink","Bold","HP + Defense","Sturdy (HA)","carbink"],
-  ["Ghost","Golett","Golett / Golurk",622,false,"Golurk","Adamant","Attack + HP","No Guard (HA) or Iron Fist","golurk"],
+  ["Rock","Carbink","Carbink",703,false,"Carbink","Bold","HP + Defense","Sturdy (HA)","carbink","USUM: SOS-chain Carbink at Ten Carat Hill or Vast Poni Canyon. Once the chain reaches 10, called Carbink can have Sturdy; 30+ gives the best HA odds (15%) plus 4 guaranteed perfect IVs."],
+  ["Ghost","Golett","Golett / Golurk",622,false,"Golurk","Adamant","Attack + HP","No Guard (HA) or Iron Fist","golurk","No Guard is TRANSFER ONLY in USUM. Best source: X/Y Ground Friend Safari — catch a No Guard Golurk and transfer it through Bank. If you want a fresh Golett, breed the HA Golurk with Ditto before/after transfer. Iron Fist is a perfectly usable non-HA fallback."],
   ["Dragon","Goomy","Goomy / Sliggoo / Goodra",704,false,"Goodra","Modest","Sp. Atk + Sp. Def","Sap Sipper","goodra"],
-  ["Dark","Murkrow","Murkrow / Honchkrow",198,false,"Honchkrow","Adamant","Attack + Speed","Moxie (HA)","honchkrow"],
+  ["Dark","Murkrow","Murkrow / Honchkrow",198,false,"Honchkrow","Adamant","Attack + Speed","Moxie (HA)","honchkrow","USUM: SOS-chain Murkrow in Vast Poni Canyon. Hunt a Prankster Murkrow (its HA); when evolved, that HA slot becomes Moxie on Honchkrow."],
   ["Steel","Durant","Durant",632,false,"Durant","Jolly","Attack + Speed","Hustle","durant"],
   ["Fairy","Comfey","Comfey",764,false,"Comfey","Modest","Sp. Atk + HP","Triage","comfey"]
  ],
  brandon:[
-  ["Normal","Kecleon","Kecleon",352,false,"Kecleon","Adamant","Attack + HP","Protean (HA)","kecleon"],
+  ["Normal","Kecleon","Kecleon",352,false,"Kecleon","Adamant","Attack + HP","Protean (HA)","kecleon","TRANSFER ONLY in USUM. Easiest guaranteed source: ORAS after the Delta Episode — the hidden Kecleon behind the astronaut board in the Mossdeep Space Center has Protean. Catch it and send it through Bank."],
   ["Fire","Heatmor","Heatmor",631,false,"Heatmor","Modest","Sp. Atk + HP","Flash Fire","heatmor"],
-  ["Water","Pyukumuku","Pyukumuku",771,false,"Pyukumuku","Bold","HP + Defense","Unaware (HA)","pyukumuku"],
-  ["Electric","Pachirisu","Pachirisu",417,false,"Pachirisu","Careful","HP + Sp. Def","Volt Absorb (HA)","pachirisu"],
+  ["Water","Pyukumuku","Pyukumuku",771,false,"Pyukumuku","Bold","HP + Defense","Unaware (HA)","pyukumuku","USUM: SOS-chain Pyukumuku on Route 7 or Hano Beach. After chain 10, called Pyukumuku can have Unaware; chain 30+ for the best HA odds and 4 guaranteed perfect IVs."],
+  ["Electric","Pachirisu","Pachirisu",417,false,"Pachirisu","Careful","HP + Sp. Def","Volt Absorb (HA)","pachirisu","TRANSFER ONLY in USUM. Best source: X/Y Electric Friend Safari with Pachirisu, if that Safari already has HAs unlocked. Otherwise the practical route is trade/breed from an existing Volt Absorb Pachirisu and transfer through Bank."],
   ["Grass","Petilil","Petilil / Lilligant",548,false,"Lilligant","Timid","Sp. Atk + Speed","Own Tempo","lilligant"],
   ["Ice","Eevee","Eevee / Glaceon",133,false,"Glaceon","Modest","Sp. Atk + HP","Snow Cloak","glaceon"],
   ["Fighting","Makuhita","Makuhita / Hariyama",296,false,"Hariyama","Adamant","Attack + HP","Guts","hariyama"],
@@ -70,10 +70,10 @@ var TEAMS={
   ["Bug","Wimpod","Wimpod / Golisopod",767,false,"Golisopod","Adamant","Attack + HP","Emergency Exit","golisopod"],
   ["Rock","Shuckle","Shuckle",213,false,"Shuckle","Bold","HP + Defense","Sturdy","shuckle"],
   ["Ghost","Misdreavus","Misdreavus / Mismagius",200,false,"Mismagius","Timid","Sp. Atk + Speed","Levitate","mismagius"],
-  ["Dragon","Exeggcute","Exeggcute / Alolan Exeggutor",102,false,"Alolan Exeggutor","Modest","Sp. Atk + HP","Harvest (HA)","exeggutor"],
+  ["Dragon","Exeggcute","Exeggcute / Alolan Exeggutor",102,false,"Alolan Exeggutor","Modest","Sp. Atk + HP","Harvest (HA)","exeggutor","USUM: SOS-chain Exeggcute at Ancient Poni Path, Exeggutor Island, or Poni Wilds. Catch a Harvest Exeggcute; evolving it in Alola gives Alolan Exeggutor while keeping the HA slot."],
   ["Dark","Meowth (Alolan)","Alolan Meowth / Alolan Persian",52,true,"Alolan Persian","Timid","Speed + HP / Sp. Atk","Fur Coat","persian"],
   ["Steel","Togedemaru","Togedemaru",777,false,"Togedemaru","Jolly","Attack + Speed","Iron Barbs or Lightning Rod","togedemaru"],
-  ["Fairy","Swirlix","Swirlix / Slurpuff",684,false,"Slurpuff","Adamant","Attack + Speed","Unburden (HA)","slurpuff"]
+  ["Fairy","Swirlix","Swirlix / Slurpuff",684,false,"Slurpuff","Adamant","Attack + Speed","Unburden (HA)","slurpuff","TRANSFER ONLY in USUM. Best source: X/Y Fairy Friend Safari — catch an Unburden Swirlix, then transfer it through Bank. If you do not have an already-HA-enabled Safari, trade/breed from an existing HA Swirlix is the simplest route."]
  ]
 };
 var active="gibby",missing=false;
@@ -94,9 +94,9 @@ function render(){
  document.getElementById("count").textContent=found.size+" / 18";
  document.getElementById("missingOnly").textContent=missing?"Show all":"Show missing only";
  document.getElementById("list").innerHTML=rows.map(function(r,i){
-   var type=r[0],name=r[1],line=r[2],num=r[3],exact=r[4],target=r[5],nature=r[6],focus=r[7],ability=r[8],slug=r[9],done=found.has(i);
+   var type=r[0],name=r[1],line=r[2],num=r[3],exact=r[4],target=r[5],nature=r[6],focus=r[7],ability=r[8],slug=r[9],haSource=r[10]||"",done=found.has(i);
    if(missing&&done)return "";
-   return '<label class="row '+(done?'done':'')+'"><input type="checkbox" data-i="'+i+'" '+(done?'checked':'')+'><div class="type">'+type+'</div><div class="sprite"><img src="'+spriteUrl(num,name)+'" alt="'+name+'" loading="lazy"></div><div><div class="name">'+name+'</div><div class="line">Look for: '+line+'</div><div class="prep"><strong>Build toward '+target+':</strong> '+nature+' nature • '+focus+' • Ability: '+ability+'</div>'+(exact?'<div class="exact">⚠ Exact Alolan form matters in Bank</div>':'')+'<div class="rowlinks"><a class="db" href="'+dbUrl(slug)+'" target="_blank" rel="noopener">📘 '+target+' on Pokémon Database</a></div></div></label>';
+   return '<label class="row '+(done?'done':'')+'"><input type="checkbox" data-i="'+i+'" '+(done?'checked':'')+'><div class="type">'+type+'</div><div class="sprite"><img src="'+spriteUrl(num,name)+'" alt="'+name+'" loading="lazy"></div><div><div class="name">'+name+'</div><div class="line">Look for: '+line+'</div><div class="prep"><strong>Build toward '+target+':</strong> '+nature+' nature • '+focus+' • Ability: '+ability+'</div>'+(haSource?'<div class="haSource"><strong>HA hunt:</strong> '+haSource+'</div>':'')+(exact?'<div class="exact">⚠ Exact Alolan form matters in Bank</div>':'')+'<div class="rowlinks"><a class="db" href="'+dbUrl(slug)+'" target="_blank" rel="noopener">📘 '+target+' on Pokémon Database</a></div></div></label>';
  }).join("");
  document.querySelectorAll('input[data-i]').forEach(function(cb){cb.onchange=function(){
    var i=Number(cb.dataset.i),arr=new Set(saved[active]);if(cb.checked)arr.add(i);else arr.delete(i);saved[active]=Array.from(arr);save();render();
