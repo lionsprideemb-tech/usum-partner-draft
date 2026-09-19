@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07131f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>USUM Partner Draft</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app" id="app">
+  <h1>Ultra Sun / Ultra Moon Partner Draft</h1>
+  <div class="sub">All 807 Pokémon compatible with USUM, plus major Alolan/type-changing forms. Pick two candidates for each type; your partner locks one.</div>
+
+  <div class="card">
+    <div class="topbar tabs">
+      <button id="tab0" class="active" type="button">Player 1</button>
+      <button id="tab1" type="button">Player 2</button>
+    </div>
+    <div class="controls" style="margin-top:10px">
+      <input id="playerName" type="text" placeholder="Player name">
+      <select id="typeSelect"></select>
+      <input id="search" class="wide" type="search" placeholder="Search Pokémon…">
+    </div>
+    <div class="status" style="margin-top:10px">
+      <span class="pill" id="progress">0 / 18 locked</span>
+      <span class="pill" id="candCount">0 / 2 candidates</span>
+      <span class="pill" id="poolCount"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="small" style="margin-bottom:5px">Jump to type</div>
+    <div class="typebar" id="typebar"></div>
+  </div>
+
+  <div class="card">
+    <strong id="typeHeading">Candidates</strong>
+    <div class="small">Tap exactly two checkboxes. Then let your partner tap which one you get.</div>
+    <div class="candidates" id="candidates" style="margin-top:10px"></div>
+    <div class="msg" id="message"></div>
+  </div>
+
+  <div class="card">
+    <div class="list" id="pokeList"></div>
+  </div>
+
+  <div class="card">
+    <strong>Locked 18-Pokémon roster</strong>
+    <div class="summary" id="summary" style="margin-top:10px"></div>
+  </div>
+
+  <div class="card">
+    <strong>Backup / move between phones</strong>
+    <div class="small" style="margin:4px 0 10px">Selections save automatically in this browser. Download a backup if you want to move the draft to another phone/browser.</div>
+    <div class="backup">
+      <button id="downloadBackup" type="button">Download Backup</button>
+      <button id="loadBackupBtn" type="button">Load Backup</button>
+      <input id="loadBackup" type="file" accept=".json,application/json" class="hidden">
+      <button id="showText" type="button">Show Shareable Summary</button>
+      <button id="reset" type="button">Reset Current Player</button>
+    </div>
+    <textarea id="shareText" class="hidden" readonly></textarea>
+  </div>
+
+  <div class="card small">
+    Pool note: USUM supports all Pokémon #001–#807. Meltan and Melmetal (#808–809) are not included. Alolan forms and several major type-changing USUM-compatible forms are listed separately. Mega Evolutions, Primal Reversions, and other battle-only transformations are not treated as separate draft Pokémon.
+  </div>
+</div>
+
+<script src="data-1.js"></script>
+<script src="data-2.js"></script>
+<script src="data-3.js"></script>
+<script src="data-4.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
