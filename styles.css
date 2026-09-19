@@ -69,3 +69,7 @@ textarea{width:100%;min-height:150px;background:#07131f;color:var(--text);border
 .quickInfo.compact{margin-top:6px;padding-top:6px}.nicheLine{display:flex;gap:6px;color:#dfeaf2}.nicheStar{color:var(--accent);font-weight:900;flex:0 0 auto}
 .abilityLine{margin-top:4px;color:#9fd0ff}.statLine{margin-top:4px;color:var(--muted);font-size:11px}.quickInfo.compact .nicheLine{font-size:11px}.quickInfo.compact .abilityLine{font-size:10.5px}
 @media(max-width:520px){.candidateHead{grid-template-columns:64px 1fr}.candidateSpriteWrap{width:64px;height:64px}.candidateSprite{max-width:56px;max-height:56px}.poke{grid-template-columns:34px 1fr}.pokeInfo{grid-template-columns:48px 1fr}.spriteWrap{width:48px;height:48px}.pokeSprite{max-width:42px;max-height:42px}.formtag{grid-column:2;justify-self:start}.quickInfo.compact .nicheLine{font-size:10.5px}.quickInfo.compact .abilityLine{font-size:10px}}
+
+/* Evolution-family summary */
+.payoffLine{margin-bottom:3px;color:#f7e4a4}.branchLine{margin-bottom:3px;color:#c5d7e4}.lineTypeLine{margin-bottom:4px;color:#a9c0d0;font-size:11px}
+.quickInfo.compact .payoffLine,.quickInfo.compact .branchLine,.quickInfo.compact .lineTypeLine{font-size:10.5px}
