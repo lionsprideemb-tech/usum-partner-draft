@@ -9,7 +9,7 @@ const FORM_IDS = {
   "Geodude (Alolan)":"geodudealola","Graveler (Alolan)":"graveleralola","Golem (Alolan)":"golemalola","Grimer (Alolan)":"grimeralola","Muk (Alolan)":"mukalola",
   "Exeggutor (Alolan)":"exeggutoralola","Marowak (Alolan)":"marowakalola","Wormadam (Sandy Cloak)":"wormadamsandy","Wormadam (Trash Cloak)":"wormadamtrash",
   "Rotom (Heat)":"rotomheat","Rotom (Wash)":"rotomwash","Rotom (Frost)":"rotomfrost","Rotom (Fan)":"rotomfan","Rotom (Mow)":"rotommow",
-  "Shaymin (Sky Forme)":"shayminsky","Hoopa (Unbound)":"hoopaunbound","Oricorio (Baile Style)":"oricoriobaile","Oricorio (Pom-Pom Style)":"oricoriopompom",
+  "Shaymin (Sky Forme)":"shayminsky","Hoopa (Unbound)":"hoopaunbound","Oricorio (Baile Style)":"oricorio","Oricorio (Pom-Pom Style)":"oricoriopompom",
   "Oricorio (Pa'u Style)":"oricoriopau","Oricorio (Sensu Style)":"oricoriosensu","Lycanroc (Midday Form)":"lycanroc","Lycanroc (Midnight Form)":"lycanrocmidnight",
   "Lycanroc (Dusk Form)":"lycanrocdusk","Necrozma (Dusk Mane)":"necrozmaduskmane","Necrozma (Dawn Wings)":"necrozmadawnwings"
 };
