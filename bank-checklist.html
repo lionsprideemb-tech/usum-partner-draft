@@ -6,71 +6,74 @@
 <meta name="theme-color" content="#07131f">
 <title>USUM Bank Hunt Checklist</title>
 <style>
-:root{--bg:#07131f;--panel:#102333;--panel2:#0a1b29;--line:#28475e;--text:#f6fbff;--muted:#a9c0d0;--accent:#ffd166;--good:#63d297}
+:root{--bg:#07131f;--panel:#102333;--panel2:#0a1b29;--line:#28475e;--text:#f6fbff;--muted:#a9c0d0;--accent:#ffd166;--good:#63d297;--blue:#76b7ff}
 *{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#07131f,#0b1b29);color:var(--text);font:16px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
-.app{max-width:860px;margin:auto;padding:12px 10px 70px}h1{font-size:24px;margin:8px 0 4px}.sub{color:var(--muted);font-size:14px;margin-bottom:12px}
+.app{max-width:900px;margin:auto;padding:12px 10px 70px}h1{font-size:24px;margin:8px 0 4px}.sub{color:var(--muted);font-size:14px;margin-bottom:12px}
 .nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:9px 12px;border-radius:12px;border:1px solid var(--line);background:#173247;color:var(--text);text-decoration:none;font-weight:800}
 .tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.tabs button{min-height:48px;border-radius:12px;border:1px solid var(--line);background:#173247;color:var(--text);font-weight:900;font-size:16px}.tabs button.active{background:var(--accent);color:#16202a;border-color:var(--accent)}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px;margin:10px 0}
 .progress{display:flex;justify-content:space-between;gap:10px;align-items:center}.count{font-size:18px;font-weight:900;color:var(--good)}.small{font-size:12px;color:var(--muted)}
 .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.controls button{min-height:42px;padding:8px 11px;border-radius:11px;border:1px solid var(--line);background:#173247;color:var(--text);font-weight:800}
-.list{display:grid;gap:8px}.row{display:grid;grid-template-columns:34px 82px 56px 1fr;gap:10px;align-items:center;background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:9px 10px;min-height:74px}.row.done{opacity:.55}.row input{width:25px;height:25px;accent-color:#ffd166}.type{font-weight:900}.sprite{width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:#102638;border:1px solid rgba(255,255,255,.05)}.sprite img{max-width:42px;max-height:42px}
-.name{font-size:18px;font-weight:850;color:var(--good)}.line{font-size:12px;color:var(--muted);margin-top:2px}.exact{font-size:11px;color:#ffdca0;margin-top:3px}
-@media(max-width:520px){.row{grid-template-columns:32px 70px 48px 1fr;gap:8px;padding:8px}.type{font-size:14px}.name{font-size:16px}.sprite{width:44px;height:44px}.sprite img{max-width:38px;max-height:38px}}
+.list{display:grid;gap:8px}.row{display:grid;grid-template-columns:34px 78px 56px 1fr;gap:10px;align-items:start;background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:10px;min-height:92px}.row.done{opacity:.55}.row input{width:25px;height:25px;accent-color:#ffd166;margin-top:11px}.type{font-weight:900;margin-top:10px}.sprite{width:50px;height:50px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:#102638;border:1px solid rgba(255,255,255,.05)}.sprite img{max-width:44px;max-height:44px}
+.name{font-size:18px;font-weight:850;color:var(--good)}.line{font-size:12px;color:var(--muted);margin-top:2px}.prep{font-size:12px;color:#dbe8f1;margin-top:5px}.prep strong{color:#ffdca0}.exact{font-size:11px;color:#ffdca0;margin-top:4px}
+.rowlinks{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px}.db{display:inline-flex;align-items:center;min-height:34px;padding:6px 9px;border-radius:9px;background:#173247;border:1px solid var(--line);color:var(--blue);text-decoration:none;font-size:12px;font-weight:900}.db:active{transform:scale(.98)}
+.note{margin-top:8px;color:var(--muted);font-size:11px}
+@media(max-width:520px){.row{grid-template-columns:32px 64px 46px 1fr;gap:7px;padding:8px}.type{font-size:13px}.name{font-size:16px}.sprite{width:44px;height:44px}.sprite img{max-width:38px;max-height:38px}.prep,.line{font-size:11px}.db{font-size:11px}}
 </style>
 </head>
 <body><div class="app">
 <h1>USUM Bank Hunt Checklist</h1>
-<div class="sub">Use this while searching Pokémon Bank. Any member of the listed evolution line counts unless the row specifically says an Alolan form is required.</div>
+<div class="sub">Use this while searching Pokémon Bank. Any member of the listed evolution line counts unless the row says the exact Alolan form matters. The prep recommendation is a simple, strong default for an Ultra Sun/Ultra Moon story run—not the only viable build.</div>
 <div class="nav"><a class="btn" href="./">← Back to Draft</a></div>
 <div class="tabs"><button id="gibbyTab" class="active">Gibby’s Team</button><button id="brandonTab">Brandon’s Team</button></div>
 <div class="card">
-  <div class="progress"><div><strong id="teamTitle">Gibby’s Team</strong><div class="small">Tap the box when you find one in Bank.</div></div><div class="count" id="count">0 / 18</div></div>
+  <div class="progress"><div><strong id="teamTitle">Gibby’s Team</strong><div class="small">Tap the box when you find a usable member of that line in Bank.</div></div><div class="count" id="count">0 / 18</div></div>
   <div class="controls"><button id="missingOnly">Show missing only</button><button id="reset">Reset this team</button></div>
 </div>
 <div class="list" id="list"></div>
+<div class="card note">Nature recommendations here prioritize an easy, reliable in-game build. If you already have a good Pokémon with a different nature, don't throw it away automatically—the Pokémon Database button gives you the full stats, abilities, moves, and breeding details for deeper checking.</div>
 </div>
 <script>
 var TEAMS={
  gibby:[
-  ["Normal","Lickitung","Lickitung / Lickilicky",108,false],
-  ["Fire","Turtonator","Turtonator",776,false],
-  ["Water","Staryu","Staryu / Starmie",120,false],
-  ["Electric","Emolga","Emolga",587,false],
-  ["Grass","Tangela","Tangela / Tangrowth",114,false],
-  ["Ice","Seel","Seel / Dewgong",86,false],
-  ["Fighting","Machop","Machop / Machoke / Machamp",66,false],
-  ["Poison","Ekans","Ekans / Arbok",23,false],
-  ["Ground","Tympole","Tympole / Palpitoad / Seismitoad",535,false],
-  ["Flying","Oricorio","Oricorio — any style is fine",741,false],
-  ["Psychic","Spoink","Spoink / Grumpig",325,false],
-  ["Bug","Cutiefly","Cutiefly / Ribombee",742,false],
-  ["Rock","Carbink","Carbink",703,false],
-  ["Ghost","Golett","Golett / Golurk",622,false],
-  ["Dragon","Goomy","Goomy / Sliggoo / Goodra",704,false],
-  ["Dark","Murkrow","Murkrow / Honchkrow",198,false],
-  ["Steel","Durant","Durant",632,false],
-  ["Fairy","Comfey","Comfey",764,false]
+  ["Normal","Lickitung","Lickitung / Lickilicky",108,false,"Lickilicky","Adamant","Attack + HP","Own Tempo or Cloud Nine","lickilicky"],
+  ["Fire","Turtonator","Turtonator",776,false,"Turtonator","Modest","Sp. Atk + HP","Shell Armor","turtonator"],
+  ["Water","Staryu","Staryu / Starmie",120,false,"Starmie","Timid","Sp. Atk + Speed","Natural Cure","starmie"],
+  ["Electric","Emolga","Emolga",587,false,"Emolga","Timid","Sp. Atk + Speed","Motor Drive","emolga"],
+  ["Grass","Tangela","Tangela / Tangrowth",114,false,"Tangrowth","Bold","HP + Defense","Regenerator (HA)","tangrowth"],
+  ["Ice","Seel","Seel / Dewgong",86,false,"Dewgong","Adamant","Attack + HP","Thick Fat","dewgong"],
+  ["Fighting","Machop","Machop / Machoke / Machamp",66,false,"Machamp","Adamant","Attack + HP","No Guard","machamp"],
+  ["Poison","Ekans","Ekans / Arbok",23,false,"Arbok","Jolly","Attack + Speed","Intimidate","arbok"],
+  ["Ground","Tympole","Tympole / Palpitoad / Seismitoad",535,false,"Seismitoad","Modest","Sp. Atk + HP","Water Absorb (HA)","seismitoad"],
+  ["Flying","Oricorio","Oricorio — any style is fine",741,false,"Oricorio","Timid","Sp. Atk + Speed","Dancer","oricorio"],
+  ["Psychic","Spoink","Spoink / Grumpig",325,false,"Grumpig","Timid","Sp. Atk + Speed","Thick Fat","grumpig"],
+  ["Bug","Cutiefly","Cutiefly / Ribombee",742,false,"Ribombee","Timid","Sp. Atk + Speed","Shield Dust","ribombee"],
+  ["Rock","Carbink","Carbink",703,false,"Carbink","Bold","HP + Defense","Sturdy (HA)","carbink"],
+  ["Ghost","Golett","Golett / Golurk",622,false,"Golurk","Adamant","Attack + HP","No Guard (HA) or Iron Fist","golurk"],
+  ["Dragon","Goomy","Goomy / Sliggoo / Goodra",704,false,"Goodra","Modest","Sp. Atk + Sp. Def","Sap Sipper","goodra"],
+  ["Dark","Murkrow","Murkrow / Honchkrow",198,false,"Honchkrow","Adamant","Attack + Speed","Moxie (HA)","honchkrow"],
+  ["Steel","Durant","Durant",632,false,"Durant","Jolly","Attack + Speed","Hustle","durant"],
+  ["Fairy","Comfey","Comfey",764,false,"Comfey","Modest","Sp. Atk + HP","Triage","comfey"]
  ],
  brandon:[
-  ["Normal","Kecleon","Kecleon",352,false],
-  ["Fire","Heatmor","Heatmor",631,false],
-  ["Water","Pyukumuku","Pyukumuku",771,false],
-  ["Electric","Pachirisu","Pachirisu",417,false],
-  ["Grass","Petilil","Petilil / Lilligant",548,false],
-  ["Ice","Eevee","Eevee / Glaceon",133,false],
-  ["Fighting","Makuhita","Makuhita / Hariyama",296,false],
-  ["Poison","Grimer (Alolan)","Alolan Grimer / Alolan Muk",88,true],
-  ["Ground","Sandygast","Sandygast / Palossand",769,false],
-  ["Flying","Chatot","Chatot",441,false],
-  ["Psychic","Bruxish","Bruxish",779,false],
-  ["Bug","Wimpod","Wimpod / Golisopod",767,false],
-  ["Rock","Shuckle","Shuckle",213,false],
-  ["Ghost","Misdreavus","Misdreavus / Mismagius",200,false],
-  ["Dragon","Exeggcute","Exeggcute / Alolan Exeggutor",102,true],
-  ["Dark","Meowth (Alolan)","Alolan Meowth / Alolan Persian",52,true],
-  ["Steel","Togedemaru","Togedemaru",777,false],
-  ["Fairy","Swirlix","Swirlix / Slurpuff",684,false]
+  ["Normal","Kecleon","Kecleon",352,false,"Kecleon","Adamant","Attack + HP","Protean (HA)","kecleon"],
+  ["Fire","Heatmor","Heatmor",631,false,"Heatmor","Modest","Sp. Atk + HP","Flash Fire","heatmor"],
+  ["Water","Pyukumuku","Pyukumuku",771,false,"Pyukumuku","Bold","HP + Defense","Unaware (HA)","pyukumuku"],
+  ["Electric","Pachirisu","Pachirisu",417,false,"Pachirisu","Careful","HP + Sp. Def","Volt Absorb (HA)","pachirisu"],
+  ["Grass","Petilil","Petilil / Lilligant",548,false,"Lilligant","Timid","Sp. Atk + Speed","Own Tempo","lilligant"],
+  ["Ice","Eevee","Eevee / Glaceon",133,false,"Glaceon","Modest","Sp. Atk + HP","Snow Cloak","glaceon"],
+  ["Fighting","Makuhita","Makuhita / Hariyama",296,false,"Hariyama","Adamant","Attack + HP","Guts","hariyama"],
+  ["Poison","Grimer (Alolan)","Alolan Grimer / Alolan Muk",88,true,"Alolan Muk","Careful","HP + Sp. Def","Poison Touch","muk"],
+  ["Ground","Sandygast","Sandygast / Palossand",769,false,"Palossand","Bold","HP + Defense","Water Compaction","palossand"],
+  ["Flying","Chatot","Chatot",441,false,"Chatot","Timid","Sp. Atk + Speed","Keen Eye or Tangled Feet","chatot"],
+  ["Psychic","Bruxish","Bruxish",779,false,"Bruxish","Jolly","Attack + Speed","Strong Jaw","bruxish"],
+  ["Bug","Wimpod","Wimpod / Golisopod",767,false,"Golisopod","Adamant","Attack + HP","Emergency Exit","golisopod"],
+  ["Rock","Shuckle","Shuckle",213,false,"Shuckle","Bold","HP + Defense","Sturdy","shuckle"],
+  ["Ghost","Misdreavus","Misdreavus / Mismagius",200,false,"Mismagius","Timid","Sp. Atk + Speed","Levitate","mismagius"],
+  ["Dragon","Exeggcute","Exeggcute / Alolan Exeggutor",102,false,"Alolan Exeggutor","Modest","Sp. Atk + HP","Harvest (HA)","exeggutor"],
+  ["Dark","Meowth (Alolan)","Alolan Meowth / Alolan Persian",52,true,"Alolan Persian","Timid","Speed + HP / Sp. Atk","Fur Coat","persian"],
+  ["Steel","Togedemaru","Togedemaru",777,false,"Togedemaru","Jolly","Attack + Speed","Iron Barbs or Lightning Rod","togedemaru"],
+  ["Fairy","Swirlix","Swirlix / Slurpuff",684,false,"Slurpuff","Adamant","Attack + Speed","Unburden (HA)","slurpuff"]
  ]
 };
 var active="gibby",missing=false;
@@ -81,6 +84,7 @@ function spriteUrl(n,name){
  var ids={"Grimer (Alolan)":"grimeralola","Meowth (Alolan)":"meowthalola"};
  return ids[name] ? "https://play.pokemonshowdown.com/sprites/dex/"+ids[name]+".png" : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+n+".png";
 }
+function dbUrl(slug){return "https://pokemondb.net/pokedex/"+slug}
 function save(){localStorage.setItem(key,JSON.stringify(saved))}
 function render(){
  document.getElementById("gibbyTab").classList.toggle("active",active==="gibby");
@@ -90,9 +94,9 @@ function render(){
  document.getElementById("count").textContent=found.size+" / 18";
  document.getElementById("missingOnly").textContent=missing?"Show all":"Show missing only";
  document.getElementById("list").innerHTML=rows.map(function(r,i){
-   var type=r[0],name=r[1],line=r[2],num=r[3],exact=r[4],done=found.has(i);
+   var type=r[0],name=r[1],line=r[2],num=r[3],exact=r[4],target=r[5],nature=r[6],focus=r[7],ability=r[8],slug=r[9],done=found.has(i);
    if(missing&&done)return "";
-   return '<label class="row '+(done?'done':'')+'"><input type="checkbox" data-i="'+i+'" '+(done?'checked':'')+'><div class="type">'+type+'</div><div class="sprite"><img src="'+spriteUrl(num,name)+'" alt="'+name+'" loading="lazy"></div><div><div class="name">'+name+'</div><div class="line">Look for: '+line+'</div>'+(exact?'<div class="exact">⚠ Exact Alolan form matters</div>':'')+'</div></label>';
+   return '<label class="row '+(done?'done':'')+'"><input type="checkbox" data-i="'+i+'" '+(done?'checked':'')+'><div class="type">'+type+'</div><div class="sprite"><img src="'+spriteUrl(num,name)+'" alt="'+name+'" loading="lazy"></div><div><div class="name">'+name+'</div><div class="line">Look for: '+line+'</div><div class="prep"><strong>Build toward '+target+':</strong> '+nature+' nature • '+focus+' • Ability: '+ability+'</div>'+(exact?'<div class="exact">⚠ Exact Alolan form matters in Bank</div>':'')+'<div class="rowlinks"><a class="db" href="'+dbUrl(slug)+'" target="_blank" rel="noopener">📘 '+target+' on Pokémon Database</a></div></div></label>';
  }).join("");
  document.querySelectorAll('input[data-i]').forEach(function(cb){cb.onchange=function(){
    var i=Number(cb.dataset.i),arr=new Set(saved[active]);if(cb.checked)arr.add(i);else arr.delete(i);saved[active]=Array.from(arr);save();render();
