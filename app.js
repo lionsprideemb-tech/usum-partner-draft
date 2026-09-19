@@ -96,11 +96,58 @@ function spriteHtml(mon,cls="pokeSprite"){
   const fallback=escapeAttr(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${mon.speciesNum}.png`);
   return `<img class="${cls}" src="${src}" data-fallback="${fallback}" alt="${escapeAttr(mon.name)}" loading="lazy" decoding="async" onerror="if(this.dataset.fallback){const fb=this.dataset.fallback;this.dataset.fallback='';this.src=fb;}else{this.style.display='none';this.parentNode&&this.parentNode.classList&&this.parentNode.classList.add('spriteMissing');}">`;
 }
-function battleFor(mon){return window.USUM_BATTLE?.[spriteId(mon)]||window.USUM_BATTLE?.[baseId(mon.name.replace(/\s*\(.*?\)\s*/g,"").trim())]||null;}
+function battleId(mon){
+  const sid=spriteId(mon), bid=baseId(mon.name.replace(/\s*\(.*?\)\s*/g,"").trim());
+  return window.USUM_BATTLE?.[sid]?sid:bid;
+}
+function battleFor(mon){return window.USUM_BATTLE?.[battleId(mon)]||null;}
 function unpackBattle(mon){
   const b=battleFor(mon); if(!b)return null;
-  const [hp,atk,def,spa,spd,spe,regular,hidden,special,unreleased,evolves]=b;
-  return {hp,atk,def,spa,spd,spe,regular:regular||[],hidden:hidden||"",special:special||"",unreleased:!!unreleased,evolves:!!evolves,bst:hp+atk+def+spa+spd+spe};
+  const [hp,atk,def,spa,spd,spe,regular,hidden,special,unreleased,evolves,prevo]=b;
+  return {hp,atk,def,spa,spd,spe,regular:regular||[],hidden:hidden||"",special:special||"",unreleased:!!unreleased,evolves:!!evolves,prevo:prevo||"",bst:hp+atk+def+spa+spd+spe};
+}
+function rootIdFor(mon){
+  let id=battleId(mon), guard=0;
+  while(id&&window.USUM_BATTLE?.[id]?.[11]&&guard++<8) id=window.USUM_BATTLE[id][11];
+  return id||battleId(mon);
+}
+const DATA_BY_BATTLE_ID=new Map();
+for(const mon of DATA){const id=battleId(mon);if(!DATA_BY_BATTLE_ID.has(id))DATA_BY_BATTLE_ID.set(id,mon);}
+const FAMILY_GROUPS=new Map();
+for(const mon of DATA){
+  const root=rootIdFor(mon);
+  if(!FAMILY_GROUPS.has(root))FAMILY_GROUPS.set(root,[]);
+  FAMILY_GROUPS.get(root).push(mon);
+}
+const FAMILY_REP=new Map();
+for(const [root,members] of FAMILY_GROUPS){
+  FAMILY_REP.set(root,DATA_BY_BATTLE_ID.get(root)||members[0]);
+}
+const FIRST_STAGE_DATA=[...FAMILY_REP.values()].sort((a,b)=>a.num-b.num||a.name.localeCompare(b.name));
+function firstStageFor(mon){return FAMILY_REP.get(rootIdFor(mon))||mon;}
+function familyMembers(mon){return FAMILY_GROUPS.get(rootIdFor(mon))||[mon];}
+function familyTypes(mon){return [...new Set(familyMembers(mon).flatMap(m=>m.types))];}
+function finalMembers(mon){
+  const members=familyMembers(mon);
+  const finals=members.filter(m=>{const b=unpackBattle(m);return b&&!b.evolves;});
+  return finals.length?finals:members;
+}
+function payoffMon(mon){
+  const members=familyMembers(mon);
+  const curated=members.filter(m=>SPECIAL_NICHES[m.name]);
+  const pool=curated.length?curated:finalMembers(mon);
+  return [...pool].sort((a,b)=>(unpackBattle(b)?.bst||0)-(unpackBattle(a)?.bst||0)||a.num-b.num)[0]||mon;
+}
+function familyBranchText(mon){
+  const finals=[...new Map(finalMembers(mon).map(m=>[m.name,m])).values()];
+  if(finals.length<=1)return "";
+  const names=finals.slice(0,5).map(m=>m.name);
+  return `Final options: ${names.join(" / ")}${finals.length>5?` +${finals.length-5} more`:""}`;
+}
+function lineTypesText(mon){
+  const line=familyTypes(mon),own=mon.types;
+  if(line.length===own.length&&line.every(t=>own.includes(t)))return "";
+  return `Line types: ${line.join(" / ")}`;
 }
 function roleFromStats(b){
   if(!b)return "";
@@ -139,12 +186,33 @@ function statLine(mon){
   return `BST ${b.bst} • HP ${b.hp} / Atk ${b.atk} / Def ${b.def} / SpA ${b.spa} / SpD ${b.spd} / Spe ${b.spe}`;
 }
 function quickInfoHtml(mon,compact=false){
-  const abilities=abilityLine(mon),stats=statLine(mon);
-  return `<div class="quickInfo ${compact?"compact":""}"><div class="nicheLine"><span class="nicheStar">★</span><span><strong>Why consider it:</strong> ${escapeHtml(nicheText(mon))}</span></div>${abilities?`<div class="abilityLine">${escapeHtml(abilities)}</div>`:""}${!compact&&stats?`<div class="statLine">${escapeHtml(stats)}</div>`:""}</div>`;
+  const payoff=payoffMon(mon),abilities=abilityLine(payoff),stats=statLine(payoff);
+  const stageLabel=payoff.name!==mon.name?`<div class="payoffLine"><strong>Useful stage:</strong> ${escapeHtml(payoff.name)}</div>`:"";
+  const branch=familyBranchText(mon), lineTypes=lineTypesText(mon);
+  return `<div class="quickInfo ${compact?"compact":""}">${stageLabel}${branch?`<div class="branchLine">${escapeHtml(branch)}</div>`:""}${lineTypes?`<div class="lineTypeLine">${escapeHtml(lineTypes)}</div>`:""}<div class="nicheLine"><span class="nicheStar">★</span><span><strong>Why consider it:</strong> ${escapeHtml(nicheText(payoff))}</span></div>${abilities?`<div class="abilityLine">${escapeHtml(abilities)}</div>`:""}${!compact&&stats?`<div class="statLine">${escapeHtml(stats)}</div>`:""}</div>`;
 }
 
-
 function byKey(k) { return DATA.find(p=>keyOf(p)===k); }
+function canonicalKey(k){
+  const mon=byKey(k); if(!mon)return k;
+  return keyOf(firstStageFor(mon));
+}
+(function migrateOldSelections(){
+  let changed=false;
+  for(const p of state.players){
+    for(const t of TYPES){
+      const pick=p.picks[t];
+      const converted=[...new Set(pick.candidates.map(canonicalKey))].slice(0,2);
+      if(JSON.stringify(converted)!==JSON.stringify(pick.candidates)){pick.candidates=converted;changed=true;}
+      if(pick.locked){
+        const locked=canonicalKey(pick.locked);
+        if(locked!==pick.locked){pick.locked=locked;changed=true;}
+        if(!pick.candidates.includes(locked)&&pick.candidates.length<2){pick.candidates.push(locked);changed=true;}
+      }
+    }
+  }
+  if(changed)save();
+})();
 function lockedNums(p) {
   return new Set(TYPES.map(t=>p.picks[t].locked).filter(Boolean).map(baseNumOfKey));
 }
@@ -201,8 +269,8 @@ function renderCandidates() {
 function renderList() {
   const p=activePlayer(), pick=p.picks[state.type];
   const q=$("search").value.trim().toLowerCase();
-  let pool=DATA.filter(mon=>mon.types.includes(state.type));
-  if(q) pool=pool.filter(mon=>mon.name.toLowerCase().includes(q)||String(mon.num).includes(q));
+  let pool=FIRST_STAGE_DATA.filter(mon=>familyTypes(mon).includes(state.type));
+  if(q) pool=pool.filter(mon=>mon.name.toLowerCase().includes(q)||String(mon.num).includes(q)||familyMembers(mon).some(m=>m.name.toLowerCase().includes(q)));
   $("poolCount").textContent=`${pool.length} shown`;
   const lockedElsewhere=lockedNums(p);
   $("pokeList").innerHTML=pool.map(mon=>{
