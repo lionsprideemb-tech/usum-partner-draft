@@ -1,0 +1,1 @@
+window.USUM_BATTLE={};
